@@ -10,6 +10,7 @@
 2.安装python模块 cmd执行命令
 
 pip install pycryptodome
+
 pip install requests
 
 3.双击打开py即可运行
