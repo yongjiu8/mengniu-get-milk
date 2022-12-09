@@ -25,3 +25,6 @@ pip install requests
 
 运行截图：
 ![image](https://user-images.githubusercontent.com/49848349/206611043-edf5854f-488c-43ff-821a-a74d1d266774.png)
+
+交流群：
+![image](https://user-images.githubusercontent.com/49848349/206616062-426f6747-58da-43da-82a3-e676fbf6f436.png)
