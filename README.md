@@ -4,10 +4,14 @@
 2022-12-09 更新至1.3版本
 
 使用方法：
+
 1.安装python
+
 2.安装python模块 cmd执行命令
+
 pip install pycryptodome
 pip install requests
+
 3.双击打开py即可运行
 
 说明：
