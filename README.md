@@ -17,7 +17,7 @@ pip install requests
 
 3.修改config.json里面的token即可使用 多开 复制多份exe+配置文件 放在不同文件夹即可
 
-3.双击打开py或者用exe即可运行
+4.双击打开py或者用exe即可运行
 
 说明：
 活动微信小程序：蒙牛世界杯
