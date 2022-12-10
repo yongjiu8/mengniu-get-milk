@@ -1,6 +1,7 @@
 import base64
 import datetime
 import hashlib
+import json
 import os
 import random
 import sys
@@ -110,27 +111,34 @@ def isStart():
         return False
 
 if __name__ == '__main__':
+    try:
+        with open('./config.json', 'r') as c:
+            rdConfigStr = c.read()
+        config = json.loads(rdConfigStr)
+    except Exception as e:
+        printf(f'加载配置文件异常：{str(e)}')
+        os.system('pause')
 
     '''
     time无需管 服务器获取
     '''
     start_time = 0
-    domain = 'https://mengniu-apig.xiaoyisz.com'
+    domain = config['domain']
 
     '''
     token是小程序包的请求头的Authorization: 
     '''
-    token = ""
-    desKey = "pZN8^thwwfKl8^oz"
-    clientKey = 'IoXU0Mxmfei3fPSG'
-    clientSecret = 'QuLZtYs2pHjLdTsb9SvFrfXihPAn4EPqMgFU0VtduKKbeM3UcTNwg9QRGU8KUIMEHhCij0Q5EfimTTBDqySAxwdL3eAYX64ogAxPz2gfP1rJ2ipyl7uibgPjtmZjSEHt'
-    updateUrl = '/mp/api/user/seckill/11x/22g/33d/226/erk313xz'
+    token = config['token']
+    desKey = config['desKey']
+    clientKey = config['clientKey']
+    clientSecret = config['clientSecret']
+    updateUrl = config['updateUrl']
     '''
     请求头
     '''
     head = {
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.30(0x18001e31) NetType/WIFI Language/zh_CN',
-        'Referer': 'https://servicewechat.com/wx8e45b2134cbeddff/54/page-frame.html',
+        'User-Agent': config['User-Agent'],
+        'Referer': config['Referer'],
         'content-type': 'application/json',
         'Authorization': token
     }
@@ -142,12 +150,12 @@ if __name__ == '__main__':
     '''
     抢多少次最大24 多了触发风控机制 导致无法获取rk 所有接口返回{"code":500,"message":"非领奶时间"} 触发风控机制后需要更新toekn才能恢复正常
     '''
-    threadNumber = 24
+    threadNumber = config['threadNumber']
     '''
     提交几秒开枪（单位毫秒）
     如 2000 就是 8:59:58秒开枪
     '''
-    preTime = 1000
+    preTime = config['preTime']
 
     rk = desDe(rk, desKey)
     jsonId = getJsonId()
@@ -156,7 +164,10 @@ if __name__ == '__main__':
     while True:
         if isStart():
             for i in range(threadNumber):
-                skillMilk(rk, jsonId)
+                try:
+                    skillMilk(rk, jsonId)
+                except Exception as e:
+                    printf(f'抢奶异常：{str(e)}')
             break
         else:
             printf("等待开始...")
