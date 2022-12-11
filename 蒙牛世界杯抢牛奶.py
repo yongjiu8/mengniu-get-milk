@@ -99,11 +99,10 @@ def skillMilk(rk, jsonId):
     head['sign'] = sign
     head['timestamp'] = str(timestamp)
     head['requestId'] = requestId
-    res = requests.get(url=url, headers=head).text
+    res = requests.get(url=url, headers=head, timeout=10).text
     printf(res)
 
 def isStart():
-    timestamp = getTimestamp()
     current_time = getTimestamp()
     if current_time >= (start_time - preTime):
         return True
@@ -160,18 +159,25 @@ if __name__ == '__main__':
     rk = desDe(rk, desKey)
     jsonId = getJsonId()
     time.sleep(1)
+    skillMilk(rk, jsonId)
+    time.sleep(1)
     tdList = []
+
+    for i in range(threadNumber):
+        tdList.append(threading.Thread(target=skillMilk, args=(rk, jsonId)))
+
     while True:
         if isStart():
-            for i in range(threadNumber):
+            for tdItem in tdList:
                 try:
-                    skillMilk(rk, jsonId)
+                    tdItem.start()
+                    time.sleep(0.1)
                 except Exception as e:
                     printf(f'抢奶异常：{str(e)}')
             break
         else:
             printf("等待开始...")
-
+        time.sleep(0.1)
     os.system('pause')
 
 
