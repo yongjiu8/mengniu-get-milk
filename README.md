@@ -3,6 +3,10 @@
 
 2022-12-09 更新至1.3版本
 
+2022-12-10 更新至1.4版本
+
+2022-12-11 更新至1.5版本
+
 使用方法：
 
 1.安装python
@@ -13,18 +17,15 @@ pip install pycryptodome
 
 pip install requests
 
-3.双击打开py即可运行
+3.修改config.json里面的token即可使用 多开 复制多份exe+配置文件 放在不同文件夹即可
+
+4.双击打开py或者用exe即可运行
 
 说明：
 活动微信小程序：蒙牛世界杯
 
-在代码py里修改token成你的即可正常运行（token自行抓包获取）
-'''
-    token是小程序包的请求头的Authorization: 
-    '''
-    token = ""
 
-交流群：
+交流群：（已满200人 群主wx：g4994g 加我拉你进群）
 ![image](https://user-images.githubusercontent.com/49848349/206616062-426f6747-58da-43da-82a3-e676fbf6f436.png)
 
 运行截图：
