@@ -99,8 +99,11 @@ def skillMilk(rk, jsonId):
     head['sign'] = sign
     head['timestamp'] = str(timestamp)
     head['requestId'] = requestId
-    res = requests.get(url=url, headers=head, timeout=10).text
-    printf(res)
+    try:
+        res = requests.get(url=url, headers=head, timeout=10).text
+        printf(res)
+    except Exception as e:
+        printf(f'超过10s请求超时...')
 
 def isStart():
     current_time = getTimestamp()
